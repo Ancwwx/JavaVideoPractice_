@@ -5,6 +5,7 @@ public class Tank {
 	private int y;
 	private int direct;
 	private int speed;
+	boolean isLive=true;
 
 	public void moveUp() {
 		y -= speed;

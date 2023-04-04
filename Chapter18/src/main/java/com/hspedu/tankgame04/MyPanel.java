@@ -53,8 +53,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 	public void paint(Graphics g) {
 		super.paint(g);
 		g.fillRect(0, 0, 1000, 750);
-
-		drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 1);
+		if (hero != null && hero.isLive) {
+			drawTank(hero.getX(), hero.getY(), g, hero.getDirect(), 1);
+		}
 
 //		if (hero.shot != null && hero.shot.isLive == true) {
 //			g.draw3DRect(hero.shot.x, hero.shot.y, 1, 1, false);
@@ -153,9 +154,10 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 		}
 
 	}
+
 	public void hitEnemyTank() {
-		for(int j=0;j<hero.shots.size();j++ ) {
-			Shot shot=hero.shots.get(j);
+		for (int j = 0; j < hero.shots.size(); j++) {
+			Shot shot = hero.shots.get(j);
 			// 判断是否击中敌人坦克
 			if (shot != null && shot.isLive) {
 				for (int i = 0; i < enemyTanks.size(); i++) {
@@ -164,11 +166,24 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 				}
 			}
 		}
-		
+
+	}
+
+	// 判断敌人坦克是否击中我方坦克
+	public void hitHero() {
+		for (int i = 0; i < enemyTanks.size(); i++) {
+			EnemyTank enemyTank = enemyTanks.get(i);
+			for (int j = 0; j < enemyTank.shots.size(); j++) {
+				Shot shot = enemyTank.shots.get(j);
+				if (hero.isLive && shot.isLive) {
+					hitTank(shot, hero);
+				}
+			}
+		}
 	}
 
 	// 编写方法，判断我方子弹是否击中敌人
-	public void hitTank(Shot s, EnemyTank enemyTank) {
+	public void hitTank(Shot s, Tank enemyTank) {
 		switch (enemyTank.getDirect()) {
 		case 0:
 		case 2:
@@ -244,8 +259,6 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 		this.repaint();
 	}
 
-
-
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -261,7 +274,9 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-             hitEnemyTank();
+			hitEnemyTank();
+			// 判断敌人坦克是否击中我方坦克
+			hitHero();
 			this.repaint();
 		}
 	}
