@@ -1,4 +1,4 @@
-package com.hspedu.tankgame05;
+package com.hspedu.tankgame06;
 
 import java.util.Vector;
 

@@ -1,4 +1,4 @@
-package com.hspedu.tankgame05;
+package com.hspedu.tankgame06;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -6,18 +6,18 @@ import java.util.Scanner;
 
 import javax.swing.JFrame;
 
-public class HspTankGame05 extends JFrame {
+public class HspTankGame06 extends JFrame {
 
 	MyPanel mp = null;
    static  Scanner scanner=new Scanner(System.in);
 	public static void main(String[] args) {
 		
 		
-		HspTankGame05 hspTankGame01 = new HspTankGame05();
+		HspTankGame06 hspTankGame01 = new HspTankGame06();
 
 	}
 
-	public HspTankGame05() {
+	public HspTankGame06() {
 		System.out.println("请输入选择 1: 新游戏 2: 继续上局");
 		String key=scanner.next();
 		mp = new MyPanel(key);
