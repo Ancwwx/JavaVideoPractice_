@@ -1,4 +1,4 @@
-package com.hspedu.tankgame05;
+package com.hspedu.tankgame06;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -28,7 +29,16 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 	Image image3 = null;
 
 	public MyPanel(String key) {
+		
+		//判断记录文件是否存在
+		File file=new File(Recorder.getRecordFile());
+		if(file.exists()) {
+			
 		nodes= Recorder.getNodesAndEnemyTankRec();
+		}else {
+			System.out.println("文件不存在，只能开启新的游戏");
+			key="1";
+		}
 		Recorder.setEnemyTanks(enemyTanks);
 		hero = new Hero(500, 100);
 		hero.setSpeed(7);
@@ -81,7 +91,8 @@ public class MyPanel extends JPanel implements KeyListener, Runnable {
 		image1 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb1.png"));
 		image2 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb2.png"));
 		image3 = Toolkit.getDefaultToolkit().getImage(MyPanel.class.getResource("bomb3.png"));
-
+        //播放指定的音乐
+		new AePlayWave("/Users/dreamtank117/Programming/Java/JavaVideoPractice_/Chapter20/src/main/java/com/hspedu/tankgame06/111.wav").start();
 	}
 //编写方法，显示我方击毁地方坦克的信息
 	public void showInfo(Graphics g) {
