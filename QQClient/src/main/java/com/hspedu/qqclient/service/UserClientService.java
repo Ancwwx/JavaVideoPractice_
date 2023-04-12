@@ -46,5 +46,34 @@ public class UserClientService {
 		}
 		return b;
 	}
+	//向服务器端请求在线用户列表
+	public void onlineFriendList() {
+		Message message= new Message();
+		message.setMesType(MessageType.MESSAGE_GET_ONLINE_FRIEND);
+		message.setSender(u.getUserId());
+		try {
+		ClientConnectServerThread clientConnectServerThread=ManageClientConnectServerThread.getClientConnectServerThread(u.getUserId());
+		Socket socket=clientConnectServerThread.getSocket();
+		ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+		oos.writeObject(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	//编写方法 退出客户端 并发送退出系统的message给服务端
+	public void logout() {
+		Message message =new Message();
+		message.setMesType(MessageType.MESSAGE_CLIENT_EXIT);
+		message.setSender(u.getUserId());
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(ManageClientConnectServerThread.getClientConnectServerThread(u.getUserId()).getSocket().getOutputStream());
+			oos.writeObject(message);
+			System.out.println(u.getUserId()+" 退出系统 ");
+			System.exit(0);//结束进程
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 }
