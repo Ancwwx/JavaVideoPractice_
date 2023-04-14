@@ -15,7 +15,7 @@ public class ReflectionQuestion {
 
 		Properties properties = new Properties();
 		properties.load(new FileInputStream(
-				"/Users/dreamtank117/Programming/Java/JavaVideoPractice_/Chapter23/src/main/java/re.properties"));
+				"/Users/dreamtank117/Programming/Java/JavaVideoPractice_/Chapter23_/src/main/java/com/hspedu/re.properties"));
 		String classfullpath = properties.get("classfullpath").toString();
 		String methodName = properties.get("method").toString();
 		System.out.println("classfullpath= " + classfullpath);
