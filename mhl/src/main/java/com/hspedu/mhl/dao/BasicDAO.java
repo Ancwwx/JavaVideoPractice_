@@ -1,4 +1,4 @@
-package com.hspedu.dao_.dao;
+package com.hspedu.mhl.dao;
 
 import java.sql.Connection;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
-import com.hspedu.jdbc.datasource.JDBCUtilesByDruid;
+import com.hspedu.mhl.utils.JDBCUtilesByDruid;
 
 public class BasicDAO<T> {
 	private QueryRunner qr = new QueryRunner();
