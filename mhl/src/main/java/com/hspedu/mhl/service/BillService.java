@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.UUID;
 
 import com.hspedu.mhl.dao.BillDAO;
+import com.hspedu.mhl.dao.MultiTableDAO;
 import com.hspedu.mhl.domain.Bill;
+import com.hspedu.mhl.domain.MultiTableBean;
 
 public class BillService {
 
 	private BillDAO billDAO = new BillDAO();
 	private MenuService menuService = new MenuService();
 	private DiningTableService diningTableService = new DiningTableService();
+	private MultiTableDAO multiTableDAO=new MultiTableDAO();
 
 	public boolean orderMenu(int menuId, int nums, int diningTableId) {
 		String billID = UUID.randomUUID().toString();
@@ -25,6 +28,9 @@ public class BillService {
 	
 	public List<Bill> list(){
 		return billDAO.queryMulti("select * from bill ", Bill.class);
+	}
+	public List<MultiTableBean> list2(){
+		return multiTableDAO.queryMulti("SELECT bill.*,name,price FROM bill,menu WHERE bill.menuId = menu.id", MultiTableBean.class);
 	}
 	public boolean hasPayBillByDiningTableId(int diningTableId) {
 		Bill bill= billDAO.querySingle("select * from bill where diningTableId=? and state='未结账' Limit 0,1", Bill.class, diningTableId);
