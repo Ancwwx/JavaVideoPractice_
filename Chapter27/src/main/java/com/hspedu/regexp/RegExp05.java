@@ -14,8 +14,8 @@ public class RegExp05 {
 		// String regStr="\\d{2,5}";
 		// String regStr="1+";
 		// String regStr="\\d+";
-		// String regStr = "1*";
-		String regStr="a1?";
+		String regStr = "1*";
+		//String regStr="a1?";
 		
 		
 		Pattern pattern = Pattern.compile(regStr);
