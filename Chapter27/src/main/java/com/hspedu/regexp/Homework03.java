@@ -7,7 +7,7 @@ public class Homework03 {
 	public static void main(String[] args) {
 		String content = "http://www.sohu.com:8080/abc/index.htm";
 		String regStr = "^([a-zA-Z]+)://([a-zA-Z.]+):(\\d+)[\\w-/]*/([\\w.]+)$";
-		
+
 		Pattern pattern = Pattern.compile(regStr);
 		Matcher matcher = pattern.matcher(content);
 		if (matcher.matches()) {
@@ -17,10 +17,10 @@ public class Homework03 {
 			System.out.println("端口: " + matcher.group(3));
 			System.out.println("文件: " + matcher.group(4));
 
-
-		}else {
+		} else {
 			System.out.println("匹配失败");
 		}
+		
 	}
 
 }
